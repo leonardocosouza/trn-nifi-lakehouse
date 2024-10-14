@@ -91,9 +91,7 @@ services:
     volumes:
       - ./metastore/hive-site.xml:/opt/hive/conf/hive-site.xml:ro
       - ./jar/postgresql-42.7.4.jar:/opt/hive/lib/postgresql-42.7.4.jar
-#      - ./jar/aws-java-sdk-bundle-1.12.648.jar:/opt/hive/lib/aws-java-sdk-bundle-1.12.648.jar
-#      - ./jar/hadoop-common-3.3.6.jar:/opt/hive/lib/hadoop-common-3.3.6.jar
-#      - ./jar/hadoop-hdfs-3.3.6.jar:/opt/hive/lib/hadoop-hdfs-3.3.6.jar
+#      - ./jar/aws-java-sdk-bundle-1.12.367.jar:/opt/hive/lib/aws-java-sdk-bundle-1.12.367.jar
 #      - ./jar/hadoop-aws-3.3.6.jar:/opt/hive/lib/hadoop-aws-3.3.6.jar
     environment:
       - SERVICE_NAME=metastore
@@ -119,14 +117,7 @@ services:
       - ./trino/etc:/etc/trino/:ro
       - ./trino/conf/core-hive.xml:/usr/lib/trino/plugin/hive/core-site.xml
       - ./jar/postgresql-42.7.4.jar:/usr/lib/trino/plugin/hive/postgresql-42.7.4.jar
-      - ./jar/hive-metastore-4.0.1.jar:/usr/lib/trino/plugin/hive/hive-metastore-4.0.1.jar
-      - ./jar/hive-exec-4.0.1.jar:/usr/lib/trino/plugin/hive/hive-exec-4.0.1.jar
-      - ./jar/hive-service-4.0.1.jar:/usr/lib/trino/plugin/hive/hive-service-4.0.1.jar
-      - ./jar/hive-common-4.0.1.jar:/usr/lib/trino/plugin/hive/hive-common-4.0.1.jar
-      - ./jar/hadoop-common-3.3.6.jar:/usr/lib/trino/plugin/hive/hadoop-common-3.3.6.jar
-      - ./jar/hadoop-hdfs-3.3.6.jar:/usr/lib/trino/plugin/hive/hadoop-hdfs-3.3.6.jar
-      - ./jar/hadoop-aws-3.3.6.jar:/usr/lib/trino/plugin/hive/hadoop-aws-3.3.6.jar
-      - ./jar/aws-java-sdk-bundle-1.12.648.jar:/usr/lib/trino/plugin/hive/aws-java-sdk-bundle-1.12.648.jar
+      - ./jar/aws-java-sdk-bundle-1.12.367.jar:/usr/lib/trino/plugin/hive/aws-java-sdk-bundle-1.12.367.jar
     depends_on:
       - minio-mc
       - hive-metastore
