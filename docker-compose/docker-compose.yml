@@ -25,11 +25,53 @@ services:
 #      - ./nifi/db/provenance_repository:/opt/nifi/nifi-current/provenance_repository
     environment:
       NIFI_WEB_HTTPS_PORT: 8443
-      SINGLE_USER_CREDENTIALS_USERNAME: admin
-      SINGLE_USER_CREDENTIALS_PASSWORD: 123456789012
+#      SINGLE_USER_CREDENTIALS_USERNAME: admin
+#      SINGLE_USER_CREDENTIALS_PASSWORD: 123456789012
+# Alterar senha:   ./bin/nifi.sh set-single-user-credentials admin "123456789012"
+      AUTH: ldap
+      KEYSTORE_PATH: /opt/certs/keystore.jks
+      KEYSTORE_TYPE: JKS
+      KEYSTORE_PASSWORD: {copiar do arquivo nifi.properties}
+      TRUSTSTORE_PATH: /opt/certs/truststore.jks
+      TRUSTSTORE_PASSWORD: {copiar do arquivo nifi.properties}
+      TRUSTSTORE_TYPE: JKS
+      INITIAL_ADMIN_IDENTITY: 'cn=nifiadmin,ou=users,dc=nfs,dc=org'
+      LDAP_AUTHENTICATION_STRATEGY: 'SIMPLE'
+      LDAP_MANAGER_DN: 'cn=admin,dc=nfs,dc=org'
+      LDAP_MANAGER_PASSWORD: 'adminpassword'
+      LDAP_USER_SEARCH_BASE: 'ou=users,dc=nfs,dc=org'
+      LDAP_USER_SEARCH_FILTER: 'uid={0}'
+      LDAP_IDENTITY_STRATEGY: 'USE_DN'
+      LDAP_URL: 'ldap://openldap:1389'
+    depends_on:
+      - openldap
     networks:
       - network
 
+    #Gerar Certificados:
+    # docker exec -u 0 -it nifi sh -c "/opt/nifi/nifi-toolkit-current/bin/tls-toolkit.sh standalone -n 'localhost' -B '123456789012' -C 'CN=nifiadmin,OU=NFS' -O &&
+    # mv /opt/nifi/nifi-current/localhost/* /opt/certs/ &&
+    # mv /opt/nifi/nifi-current/nifi-* /opt/certs/"
+
+# Servidor de Autenticação
+  openldap:
+      image: bitnami/openldap:latest
+      container_name: openldap
+      hostname: openldap
+      environment:
+        LDAP_ORGANISATION: nfs
+        LDAP_DOMAIN: nfs.org
+        LDAP_ADMIN_USERNAME: 'admin'
+        LDAP_ADMIN_PASSWORD: 'adminpassword'
+        LDAP_USERS: 'nifiadmin, user1, user2, user3'
+        LDAP_PASSWORDS: 'nifiadmin, user1, user2, user3'
+        LDAP_ROOT: 'dc=nfs,dc=org'
+        LDAP_ADMIN_DN: 'cn=admin,dc=nfs,dc=org'
+      ports:
+        - '1389:1389'
+        - '1636:1636'
+      networks:
+        - network
 
   postgres:
     image: 'postgres:latest'
