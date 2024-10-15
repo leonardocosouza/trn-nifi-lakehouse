@@ -15,7 +15,7 @@ services:
           memory: 2G  # Reserva pelo menos
     volumes:
 #      - ./jar:/opt/jdbc
-#      - ./nifi/certs:/opt/certs
+      - ./nifi/certs:/opt/certs
 #      - ./nifi/logs:/opt/nifi/nifi-current/logs/
       - ./metastore/hive-site.xml:/opt/nifi/nifi-current/core-site.xml
       - ./nifi/properties:/opt/nifi/nifi-current/properties  #credentials.properties (minio)
