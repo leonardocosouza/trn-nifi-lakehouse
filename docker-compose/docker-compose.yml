@@ -27,20 +27,14 @@ services:
       NIFI_WEB_HTTPS_PORT: 8443
 #      SINGLE_USER_CREDENTIALS_USERNAME: admin
 #      SINGLE_USER_CREDENTIALS_PASSWORD: 123456789012
-      NIFI_SECURITY_KEYSTORE: ./conf/keystore.jks
-      NIFI_SECURITY_KEYSTORETYPE: jks
-      NIFI_SECURITY_KEYSTOREPASSWD: mc9ma59MMjzR7bzwMWaawzFY54dImQsU/0kzoG4/cwA
-      NIFI_SECURITY_TRUSTSTORE: ./conf/truststore.jks
-      NIFI_SECURITY_TRUSTSTORETYPE: jks
-      NIFI_SECURITY_TRUSTSTOREPASSWD: DmcapSeFlqnpouWKHgKG8csXwsHqb0ivjWdbzn0UrfM
 
     # Alterar senha:   ./bin/nifi.sh set-single-user-credentials admin "123456789012"
       AUTH: ldap
       KEYSTORE_PATH: /opt/certs/keystore.jks
       KEYSTORE_TYPE: JKS
-      KEYSTORE_PASSWORD: {copiar do arquivo nifi.properties}
+      KEYSTORE_PASSWORD: mc9ma59MMjzR7bzwMWaawzFY54dImQsU/0kzoG4/cwA
       TRUSTSTORE_PATH: /opt/certs/truststore.jks
-      TRUSTSTORE_PASSWORD: {copiar do arquivo nifi.properties}
+      TRUSTSTORE_PASSWORD: DmcapSeFlqnpouWKHgKG8csXwsHqb0ivjWdbzn0UrfM
       TRUSTSTORE_TYPE: JKS
       INITIAL_ADMIN_IDENTITY: 'cn=nifiadmin,ou=users,dc=nfs,dc=org'
       LDAP_AUTHENTICATION_STRATEGY: 'SIMPLE'
