@@ -13,8 +13,8 @@ ENV HIVE_HOME=/opt/apache-hive-metastore-${METASTORE_VERSION}-bin
 RUN curl -L https://repo1.maven.org/maven2/org/apache/hive/hive-standalone-metastore/${METASTORE_VERSION}/hive-standalone-metastore-${METASTORE_VERSION}-bin.tar.gz | tar zxf - && \
     curl -L https://archive.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz | tar zxf - && \
     curl -L --output postgresql-42.7.4.jar https://jdbc.postgresql.org/download/postgresql-42.7.4.jar && \
-    cp postgresql-42.4.0.jar ${HIVE_HOME}/lib/ && \
-    rm -rf  postgresql-42.4.0.jar
+    cp postgresql-42.7.4.jar ${HIVE_HOME}/lib/ && \
+    rm -rf  postgresql-42.7.4.jar
 
 COPY scripts/entrypoint.sh /entrypoint.sh
 
