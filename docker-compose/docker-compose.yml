@@ -4,7 +4,7 @@ services:
     container_name: nifi
     hostname: nifi
     ports:
-      - '8443:8443'
+      - '9443:9443'
     deploy:
       resources:
         limits:
@@ -15,7 +15,7 @@ services:
           memory: 2G  # Reserva pelo menos
     volumes:
 #      - ./jar:/opt/jdbc
-      - ./nifi/certs:/opt/certs
+#      - ./nifi/certs:/opt/certs
 #      - ./nifi/logs:/opt/nifi/nifi-current/logs/
       - ./metastore/hive-site.xml:/opt/nifi/nifi-current/core-site.xml
       - ./nifi/properties:/opt/nifi/nifi-current/properties  #credentials.properties (minio)
@@ -24,7 +24,7 @@ services:
 #      - ./nifi/db/content_repository:/opt/nifi/nifi-current/content_repository
 #      - ./nifi/db/provenance_repository:/opt/nifi/nifi-current/provenance_repository
     environment:
-      NIFI_WEB_HTTPS_PORT: 8443
+      NIFI_WEB_HTTPS_PORT: 9443
       SINGLE_USER_CREDENTIALS_USERNAME: admin
       SINGLE_USER_CREDENTIALS_PASSWORD: 123456789012
 
@@ -44,8 +44,8 @@ services:
 #      LDAP_USER_SEARCH_FILTER: 'uid={0}'
 #      LDAP_IDENTITY_STRATEGY: 'USE_DN'
 #      LDAP_URL: 'ldap://openldap:1389'
-    depends_on:
-      - openldap
+#    depends_on:
+#      - openldap
     networks:
       - network
 
@@ -55,24 +55,24 @@ services:
 #     mv /opt/nifi/nifi-current/nifi-* /opt/certs/"
 
 # Servidor de Autenticação
-  openldap:
-      image: bitnami/openldap:latest
-      container_name: openldap
-      hostname: openldap
-      environment:
-        LDAP_ORGANISATION: nfs
-        LDAP_DOMAIN: nfs.org
-        LDAP_ADMIN_USERNAME: 'admin'
-        LDAP_ADMIN_PASSWORD: 'adminpassword'
-        LDAP_USERS: 'nifiadmin, user1, user2, user3'
-        LDAP_PASSWORDS: 'nifiadmin, user1, user2, user3'
-        LDAP_ROOT: 'dc=nfs,dc=org'
-        LDAP_ADMIN_DN: 'cn=admin,dc=nfs,dc=org'
-      ports:
-        - '1389:1389'
-        - '1636:1636'
-      networks:
-        - network
+#  openldap:
+#      image: bitnami/openldap:latest
+#      container_name: openldap
+#      hostname: openldap
+#      environment:
+#        LDAP_ORGANISATION: nfs
+#        LDAP_DOMAIN: nfs.org
+#        LDAP_ADMIN_USERNAME: 'admin'
+#        LDAP_ADMIN_PASSWORD: 'adminpassword'
+#        LDAP_USERS: 'nifiadmin, user1, user2, user3'
+#        LDAP_PASSWORDS: 'nifiadmin, user1, user2, user3'
+#        LDAP_ROOT: 'dc=nfs,dc=org'
+#        LDAP_ADMIN_DN: 'cn=admin,dc=nfs,dc=org'
+#      ports:
+#        - '1389:1389'
+#        - '1636:1636'
+#      networks:
+#        - network
 
   postgres:
     image: 'postgres:latest'
