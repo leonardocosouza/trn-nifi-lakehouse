@@ -96,6 +96,7 @@ services:
 #      - HIVE_METASTORE_DB_TYPE=derby
 #      - HIVE_DB_PATH=/metastore_db
       - SERVICE_NAME=metastore
+      - METASTORE_TYPE=postgres
       - DB_DRIVER=postgres
       - DB_HOST=postgres                 # Nome do serviço PostgreSQL (deve corresponder ao nome do serviço abaixo)
       - DB_PORT=5432                     # Porta padrão do PostgreSQL
