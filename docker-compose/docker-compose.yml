@@ -111,7 +111,7 @@ services:
       - network
 
   trino:
-    image: 'trinodb/trino:latest'
+    image: 'trinodb/trino:410'
     hostname: trino
     container_name: trino
     ports:
