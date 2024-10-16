@@ -36,7 +36,7 @@ services:
       TRUSTSTORE_PATH: /opt/certs/truststore.jks
       TRUSTSTORE_PASSWORD: 123456789012
       TRUSTSTORE_TYPE: JKS
-#      INITIAL_ADMIN_IDENTITY: 'cn=nifiadmin,ou=users,dc=nfs,dc=org'
+      INITIAL_ADMIN_IDENTITY: 'cn=35.232.234.241,ou=users,dc=nfs,dc=org'
 #      LDAP_AUTHENTICATION_STRATEGY: 'SIMPLE'
 #      LDAP_MANAGER_DN: 'cn=admin,dc=nfs,dc=org'
 #      LDAP_MANAGER_PASSWORD: 'adminpassword'
