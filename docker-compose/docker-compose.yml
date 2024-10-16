@@ -90,9 +90,10 @@ services:
       - '9083:9083' # Metastore Thrift
     volumes:
       - ./metastore/hive-site.xml:/opt/hive/conf/hive-site.xml:ro
-      - ./jar/postgresql-42.7.4.jar:/opt/hive/lib/postgresql-42.7.4.jar
+      - ./jar/postgresql-42.2.23.jar:/opt/hive/lib/postgresql-42.2.23.jar
 #      - ./jar/aws-java-sdk-bundle-1.12.367.jar:/opt/hive/lib/aws-java-sdk-bundle-1.12.648.jar
       - ./jar/hadoop-aws-3.3.6.jar:/opt/hive/lib/hadoop-aws-3.3.6.jar
+#curl -o aws-java-sdk-bundle-1.12.648.jar https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.12.648/aws-java-sdk-bundle-1.12.648.jar
     environment:
       - SERVICE_NAME=metastore
       - DB_DRIVER=postgres
@@ -116,7 +117,7 @@ services:
     volumes:
       - ./trino/etc:/etc/trino/:ro
       - ./trino/conf/core-hive.xml:/usr/lib/trino/plugin/hive/core-site.xml
-      - ./jar/postgresql-42.7.4.jar:/usr/lib/trino/plugin/hive/postgresql-42.7.4.jar
+      - ./jar/postgresql-42.2.23.jar:/usr/lib/trino/plugin/hive/postgresql-42.2.23.jar
 #      - ./jar/aws-java-sdk-bundle-1.12.367.jar:/usr/lib/trino/plugin/hive/aws-java-sdk-bundle-1.12.367.jar
     depends_on:
       - minio-mc
