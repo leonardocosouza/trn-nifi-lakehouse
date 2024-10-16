@@ -1,18 +1,32 @@
-FROM apache/hive:3.1.3
+FROM openjdk:8-jre-slim-buster
 
-ENV HIVE_HOME /opt/hive
-ENV HADOOP_HOME /opt/hadoop
-ENV PATH $HIVE_HOME/bin:$HADOOP_HOME/bin:$PATH
+WORKDIR /opt
 
-WORKDIR /opt/hive
+ENV HADOOP_VERSION=3.3.6
+ENV METASTORE_VERSION=3.1.3
 
-RUN apt-get update && apt-get install curl -y && \
-    curl -o /opt/hive/lib/postgresql-42.7.3.jar https://jdbc.postgresql.org/download/postgresql-42.2.3.jar && \
-    curl -o /opt/hive/lib/aws-java-sdk-bundle-1.12.648.jar https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.12.648/aws-java-sdk-bundle-1.12.648.jar && \
-    curl -o /opt/hadoop/lib/hadoop-aws-3.3.6.jar https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.6/hadoop-aws-3.3.6.jar
+RUN apt-get update && apt-get install -y netcat curl
 
+ENV HADOOP_HOME=/opt/hadoop-${HADOOP_VERSION}
+ENV HIVE_HOME=/opt/apache-hive-metastore-${METASTORE_VERSION}-bin
+
+RUN curl -L https://repo1.maven.org/maven2/org/apache/hive/hive-standalone-metastore/${METASTORE_VERSION}/hive-standalone-metastore-${METASTORE_VERSION}-bin.tar.gz | tar zxf - && \
+    curl -L https://archive.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz | tar zxf - && \
+    curl -L https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.19.tar.gz | tar zxf - && \
+    curl -L --output postgresql-42.4.0.jar https://jdbc.postgresql.org/download/postgresql-42.4.0.jar && \
+    cp mysql-connector-java-8.0.19/mysql-connector-java-8.0.19.jar ${HIVE_HOME}/lib/ && \
+    cp postgresql-42.4.0.jar ${HIVE_HOME}/lib/ && \
+    rm -rf  mysql-connector-java-8.0.19 && \
+    rm -rf  postgresql-42.4.0.jar
+
+COPY scripts/entrypoint.sh /entrypoint.sh
+
+RUN groupadd -r hive --gid=1000 && \
+    useradd -r -g hive --uid=1000 -d ${HIVE_HOME} hive && \
+    chown hive:hive -R ${HIVE_HOME} && \
+    chown hive:hive /entrypoint.sh && chmod +x /entrypoint.sh
+
+USER hive
 EXPOSE 9083
 
-COPY ./metastore/hive-site.xml /opt/hive/conf/hive-site.xml
-
-ENTRYPOINT ["hive", "--skiphadoopversion", "--skiphbasecp", "--service", "metastore"]
+ENTRYPOINT ["sh", "-c", "/entrypoint.sh"]
