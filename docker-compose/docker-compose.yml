@@ -90,6 +90,7 @@ services:
       - '9083:9083' # Metastore Thrift
     volumes:
       - ./metastore/hive-site.xml:/opt/apache-hive-metastore-3.1.3-bin/conf/metastore-site.xml:ro
+      - ./jar/postgresql-42.7.4.jar:/usr/lib/trino/plugin/hive/postgresql-42.7.4.jar
     environment:
 #      - SERVICE_NAME=metastore
 #      - HIVE_METASTORE_RUN=1
@@ -110,7 +111,7 @@ services:
       - network
 
   trino:
-    image: 'trinodb/trino:410'
+    image: 'trinodb/trino:latest'
     hostname: trino
     container_name: trino
     ports:
