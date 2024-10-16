@@ -1,6 +1,6 @@
 services:
   nifi:
-    image: apache/nifi:2.0.0.M4
+    image: apache/nifi:1.25.1
     container_name: nifi
     hostname: nifi
     ports:
@@ -48,6 +48,8 @@ services:
 #      - openldap
     networks:
       - network
+#keytool -list -v -keystore keystore.p12 -storetype PKCS12 -storepass b1830ca048e0d90d9ee5c1d30cfc4157
+#keytool -export -alias generated -keystore keystore.p12 -storetype PKCS12 -storepass b1830ca048e0d90d9ee5c1d30cfc4157 -file certificado_exportado.crt
 
     #Gerar Certificados:
 #     docker exec -u 0 -it nifi sh -c "/opt/nifi/nifi-toolkit-current/bin/tls-toolkit.sh standalone -n 'localhost' -B '123456789012' -C 'CN=nifiadmin,OU=NFS' -O &&
