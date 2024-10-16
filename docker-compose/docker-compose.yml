@@ -29,13 +29,13 @@ services:
       SINGLE_USER_CREDENTIALS_PASSWORD: 123456789012
 
     # Alterar senha:   ./bin/nifi.sh set-single-user-credentials admin "123456789012"
-#      AUTH: ldap
-#      KEYSTORE_PATH: /opt/certs/keystore.jks
-#      KEYSTORE_TYPE: JKS
-#      KEYSTORE_PASSWORD: mc9ma59MMjzR7bzwMWaawzFY54dImQsU/0kzoG4/cwA
-#      TRUSTSTORE_PATH: /opt/certs/truststore.jks
-#      TRUSTSTORE_PASSWORD: DmcapSeFlqnpouWKHgKG8csXwsHqb0ivjWdbzn0UrfM
-#      TRUSTSTORE_TYPE: JKS
+      AUTH: ldap
+      KEYSTORE_PATH: /opt/certs/keystore.p12
+      KEYSTORE_TYPE: PKCS12
+      KEYSTORE_PASSWORD: 123456789012
+      TRUSTSTORE_PATH: /opt/certs/truststore.jks
+      TRUSTSTORE_PASSWORD: 123456789012
+      TRUSTSTORE_TYPE: JKS
 #      INITIAL_ADMIN_IDENTITY: 'cn=nifiadmin,ou=users,dc=nfs,dc=org'
 #      LDAP_AUTHENTICATION_STRATEGY: 'SIMPLE'
 #      LDAP_MANAGER_DN: 'cn=admin,dc=nfs,dc=org'
