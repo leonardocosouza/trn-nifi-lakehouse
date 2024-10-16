@@ -89,23 +89,23 @@ services:
     ports:
       - '9083:9083' # Metastore Thrift
     volumes:
-#      - ./metastore/hive-site.xml:/opt/hive/conf/hive-site.xml:ro
-#      - ./jar/postgresql-42.2.23.jar:/opt/hive/lib/postgresql-42.2.23.jar
+      - ./metastore/hive-site.xml:/opt/hive/conf/hive-site.xml:ro
+      - ./jar/postgresql-42.7.4.jar:/opt/hive/lib/postgresql-42.7.4.jar
 #      - ./jar/aws-java-sdk-bundle-1.12.367.jar:/opt/hive/lib/aws-java-sdk-bundle-1.12.648.jar
-      - ./jar/hadoop-aws-3.3.6.jar:/opt/hive/lib/hadoop-aws-3.3.6.jar
+      - ./jar/hadoop-aws-3.3.6.jar:/opt/hadoop/lib/hadoop-aws-3.3.6.jar
 #curl -o aws-java-sdk-bundle-1.12.648.jar https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.12.648/aws-java-sdk-bundle-1.12.648.jar
     environment:
-      - SERVICE_NAME=metastore
-      - HIVE_METASTORE_RUN=1
-      - HIVE_METASTORE_DB_TYPE=derby
-      - HIVE_DB_PATH=/metastore_db
 #      - SERVICE_NAME=metastore
-#      - DB_DRIVER=postgres
-#      - DB_HOST=postgres                 # Nome do serviço PostgreSQL (deve corresponder ao nome do serviço abaixo)
-#      - DB_PORT=5432                     # Porta padrão do PostgreSQL
-#      - DB_NAME=hive_db                  # Nome do banco de dados no PostgreSQL
-#      - DB_USER=admin                    # Usuário do banco de dados PostgreSQL
-#      - DB_PASS=admin                    # Senha do banco de dados PostgreSQL
+#      - HIVE_METASTORE_RUN=1
+#      - HIVE_METASTORE_DB_TYPE=derby
+#      - HIVE_DB_PATH=/metastore_db
+      - SERVICE_NAME=metastore
+      - DB_DRIVER=postgres
+      - DB_HOST=postgres                 # Nome do serviço PostgreSQL (deve corresponder ao nome do serviço abaixo)
+      - DB_PORT=5432                     # Porta padrão do PostgreSQL
+      - DB_NAME=hive_db                  # Nome do banco de dados no PostgreSQL
+      - DB_USER=admin                    # Usuário do banco de dados PostgreSQL
+      - DB_PASS=admin                    # Senha do banco de dados PostgreSQL
     depends_on:
       - minio-mc
       - postgres
@@ -121,7 +121,7 @@ services:
     volumes:
       - ./trino/etc:/etc/trino/:ro
       - ./trino/conf/core-hive.xml:/usr/lib/trino/plugin/hive/core-site.xml
-      - ./jar/postgresql-42.2.23.jar:/usr/lib/trino/plugin/hive/postgresql-42.2.23.jar
+      - ./jar/postgresql-42.7.4.jar:/usr/lib/trino/plugin/hive/postgresql-42.7.4.jar
 #      - ./jar/aws-java-sdk-bundle-1.12.367.jar:/usr/lib/trino/plugin/hive/aws-java-sdk-bundle-1.12.367.jar
     depends_on:
       - minio-mc
