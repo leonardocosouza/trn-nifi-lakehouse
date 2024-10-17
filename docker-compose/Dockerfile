@@ -2,7 +2,7 @@ FROM openjdk:8-jre-slim-buster
 
 WORKDIR /opt
 
-ENV HADOOP_VERSION=3.2.0
+ENV HADOOP_VERSION=3.3.6
 ENV METASTORE_VERSION=3.1.3
 
 RUN apt-get update && apt-get install -y netcat curl
