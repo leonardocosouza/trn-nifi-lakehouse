@@ -54,6 +54,10 @@
         <value>org.apache.hadoop.fs.s3a.S3AFileSystem</value>
     </property>
     <property>
+        <name>fs.s3a.connection.ssl.enabled</name>
+        <value>false</value>
+    </property>
+    <property>
         <name>hive.metastore.warehouse.dir</name>
         <value>s3a://warehouse/</value>
         <description>Location of the default database for the warehouse</description>
