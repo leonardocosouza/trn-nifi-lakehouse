@@ -13,6 +13,8 @@ ENV HIVE_HOME=/opt/apache-hive-metastore-${METASTORE_VERSION}-bin
 RUN curl -L https://repo1.maven.org/maven2/org/apache/hive/hive-standalone-metastore/${METASTORE_VERSION}/hive-standalone-metastore-${METASTORE_VERSION}-bin.tar.gz | tar zxf - && \
     curl -L https://archive.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz | tar zxf - && \
     curl -L --output postgresql-42.7.4.jar https://jdbc.postgresql.org/download/postgresql-42.7.4.jar && \
+    curl -O https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.12.367/aws-java-sdk-bundle-1.12.367.jar && \
+    cp aws-java-sdk-bundle-1.12.367.jar ${HADOOP_HOME}/share/hadoop/tools/lib/ && \
     cp postgresql-42.7.4.jar ${HIVE_HOME}/lib/ && \
     rm -rf  postgresql-42.7.4.jar
 
@@ -26,4 +28,4 @@ RUN groupadd -r hive --gid=1000 && \
 USER hive
 EXPOSE 9083
 
-# ENTRYPOINT ["sh", "-c", "/entrypoint.sh"]
+ENTRYPOINT ["sh", "-c", "/entrypoint.sh"]

@@ -2,7 +2,7 @@
 #!/bin/sh
 
 export HADOOP_HOME=/opt/hadoop-3.3.6
-export HADOOP_CLASSPATH=${HADOOP_HOME}/share/hadoop/tools/lib/aws-java-sdk-bundle-1.12.648.jar:${HADOOP_HOME}/share/hadoop/tools/lib/hadoop-aws-3.3.6.jar
+export HADOOP_CLASSPATH=${HADOOP_HOME}/share/hadoop/tools/lib/aws-java-sdk-bundle-1.12.367.jar:${HADOOP_HOME}/share/hadoop/tools/lib/hadoop-aws-3.3.6.jar
 export JAVA_HOME=/usr/local/openjdk-8
 export METASTORE_DB_HOSTNAME=${METASTORE_DB_HOSTNAME:-localhost}
 export HMS_HOME=/opt/apache-hive-metastore-3.1.3-bin
