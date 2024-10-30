@@ -96,10 +96,10 @@ RUN curl -fSL ${MIRROR_BASE_URL}/${NIFI_BINARY_PATH} -o ${NIFI_BASE_DIR}/nifi-${
 COPY nifi-iceberg-bundle/nifi-iceberg-processors-nar/target/nifi-iceberg-processors-nar-2.0.0-SNAPSHOT.nar ${NIFI_BASE_DIR}/nifi-current/nar_extensions/
 COPY nifi-iceberg-bundle/nifi-iceberg-services-api-nar/target/nifi-iceberg-services-api-nar-2.0.0-SNAPSHOT.nar ${NIFI_BASE_DIR}/nifi-current/nar_extensions/
 COPY nifi-iceberg-bundle/nifi-iceberg-services-nar/target/nifi-iceberg-services-nar-2.0.0-SNAPSHOT.nar ${NIFI_BASE_DIR}/nifi-current/nar_extensions/
-COPY nifi-aws-bundle/nifi-aws-service-api-nar/target/nifi-aws-service-api-nar-2.0.0-SNAPSHOT.nar ${NIFI_BASE_DIR}/nifi-current/nar_extensions/
+# COPY nifi-aws-bundle/nifi-aws-service-api-nar/target/nifi-aws-service-api-nar-2.0.0-SNAPSHOT.nar ${NIFI_BASE_DIR}/nifi-current/nar_extensions/
 # COPY nifi-hadoop-bundle/nifi-hadoop-nar/target/nifi-hadoop-nar-2.0.0-SNAPSHOT.nar ${NIFI_BASE_DIR}/nifi-current/nar_extensions/
 # COPY nifi-hadoop-libraries-bundle/nifi-hadoop-libraries-nar/target/nifi-hadoop-libraries-nar-2.0.0-SNAPSHOT.nar ${NIFI_BASE_DIR}/nifi-current/nar_extensions/
-COPY nifi-aws-bundle/nifi-aws-nar/target/nifi-aws-nar-2.0.0-SNAPSHOT.nar ${NIFI_BASE_DIR}/nifi-current/nar_extensions/
+# COPY nifi-aws-bundle/nifi-aws-nar/target/nifi-aws-nar-2.0.0-SNAPSHOT.nar ${NIFI_BASE_DIR}/nifi-current/nar_extensions/
 
 
 VOLUME ${NIFI_LOG_DIR} \
