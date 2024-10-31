@@ -110,7 +110,7 @@ services:
       - rtmp
       - minio
     command: >
-      ffmpeg -i rtmp://rtmp:1935/stream -r 5 -t 60 /data/frames/frame_%04d.mp4
+      ffmpeg -i "rtmp://rtmp:1935/stream" -c:v copy -c:a copy -f mp4 /data/frames/teste
 #-c copy -flags +global_header -f segment -segment_time 60 -segment_format_options movflags=+faststart -reset_timestamps 1 test%d.mp4
     volumes:
       - ./frames:/data
