@@ -110,7 +110,7 @@ services:
       - rtmp
       - minio
     command: >
-      ffmpeg -i rtmp://endereco-do-nginx/stream -vf "fps=1" /diretorio/xpto/frame_%04d.jpg
+      ffmpeg -i rtmp://rtmp:1935/stream -vf "fps=1" /data/frames/frame_%04d.jpg
 
     #      ffmpeg -i rtmp://rtmp:1935/stream -vf fps=1/5 -q:v 2 -f image2 /data/frames/frame-%03d.jpg
     volumes:
