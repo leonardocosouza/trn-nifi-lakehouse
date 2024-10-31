@@ -110,9 +110,9 @@ services:
       - rtmp
       - minio
     command: >
-      ffmpeg -i rtmp://rtmp:1935/stream -vf fps=1/5 -q:v 2 /frames/frame-%03d.jpg
+      ffmpeg -i rtmp://rtmp:1935/stream -vf fps=1/5 -q:v 2 -f image2 /data/frames/frame-%03d.jpg
     volumes:
-      - ./frames:/frames
+      - ./frames:/data
     networks:
       - network
 
