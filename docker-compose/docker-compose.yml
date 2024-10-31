@@ -106,12 +106,14 @@ services:
 
   ffmpeg:
     image: linuxserver/ffmpeg
+    container_name: ffmpeg
     depends_on:
       - rtmp
       - minio
     command: >
-      ffmpeg -i rtmp://rtmp:1935/stream -vf fps=1/5
-      -f image2 http://minio:9000/frames/frame-%03d.jpg
+      ffmpeg -i rtmp://rtmp:1935/stream -vf fps=1/5 -q:v 2 /frames/frame-%03d.jpg
+    volumes:
+      - ./frames:/frames
     networks:
       - network
 
