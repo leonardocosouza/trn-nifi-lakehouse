@@ -28,7 +28,6 @@ services:
     networks:
       - network
 
-
   postgres:
     image: 'postgres:latest'
     hostname: postgres
